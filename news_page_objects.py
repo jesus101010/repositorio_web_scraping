@@ -3,16 +3,17 @@ import requests
 
 from common import config
 
-class HomePage:
+class NewsPage:
 
     def __init__(self, news_site_uid, url):
+        
         self._config = config()['news_sites'][news_site_uid]
         self._queries = self._config['queries']
         self._html = None
 
         self._visit(url)
 
-        @property
+
         def article_links(self):
             link_list = []
             for link in self.select(self._queries['homepage_article_links']):
@@ -29,4 +30,26 @@ class HomePage:
 
         response.raise_for_status()
 
-        self._html = bs4.BeautifulSoup(response.text, 'html.parser')       
+        
+
+        self._html = bs4.BeautifulSoup(response.text, 'html.parser')
+        return set(link['href'] for link in link_list)
+
+class Homepage(NeswPage):
+    def_init_(self, news_site_uid, url):
+        super()._init_(news_site_uid, url)
+    @property
+    def article_links(self):
+        link_list = []   
+        for link in self._select(self._queries['homepage_article_links']):
+            if link and link.has_attr('href'):
+                link_list.append(link)
+            return set(link['herf'] for link in link_list )
+    @property
+    def body(self):
+            result = self._select(self._queries['article_body'])
+            return result[0].text if len(result) else''
+    @property
+    def tittle(self):
+            result = self._select(self._queries['article_title'])
+            return result[0].text if len(result) else''
