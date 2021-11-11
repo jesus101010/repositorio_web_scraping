@@ -1,9 +1,13 @@
 news_sites:
   eluniversal:
-    url: https://www.eluniversal.com.mx
+    url: https://www.xataka.com.mx
     queries:
       homepage_article_links: '.ce6-Tipo1_Titulo a'
+      article_body: '.field-name-body'
+      article_tittle: '.Encabezado-Articulo h1'
   elpais:
     url: https://elpais.com
     queries:
       homepage_article_links: '.headline a'
+      article_body: ''
+      article_tittle: ''
